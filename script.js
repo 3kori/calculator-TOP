@@ -35,8 +35,3 @@ function operate( operator, leftNo, rightNo ) {
         return divide( leftNo, rightNo );
     }
 }
-
-console.log(operate("+", 4, 3));
-console.log(operate("-", 4, 3));
-console.log(operate("*", 4, 3));
-console.log(operate("/", 4, 3));
