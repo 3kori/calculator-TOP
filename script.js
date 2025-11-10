@@ -40,6 +40,7 @@ const numberBtns = document.querySelectorAll( ".number-btns" );
 const input= document.querySelector( ".input-display" );
 const operatorBtns = document.querySelectorAll(".operator-btns");
 const equalsBtn = document.querySelector( ".equals" );
+const clearBtn = document.querySelector( ".clear" );
 
 
 numberBtns.forEach(( numberBtn ) => {
@@ -64,5 +65,12 @@ operatorBtns.forEach(( operatorBtn ) => {
 });
 
 equalsBtn.addEventListener( "click", function() {
-    input.value = operate( arithmenticOperator, firstTerm, secondTerm);
+    input.value = operate( arithmeticOperator, firstTerm, secondTerm);
 })
+
+clearBtn.addEventListener( "click", function() {
+    input.value = "";
+    firstTerm = "";
+    secondTerm = "";
+    arithmeticOperator = "";
+});
