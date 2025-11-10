@@ -36,14 +36,33 @@ function operate( operator, leftNo, rightNo ) {
     }
 }
 
-const numberBtns = document.querySelectorAll(".number-btns");
-const input= document.querySelector(".input-display");
+const numberBtns = document.querySelectorAll( ".number-btns" );
+const input= document.querySelector( ".input-display" );
+const operatorBtns = document.querySelectorAll(".operator-btns");
+const equalsBtn = document.querySelector( ".equals" );
+
 
 numberBtns.forEach(( numberBtn ) => {
-    numberBtn.addEventListener("click", function (e) {
+    numberBtn.addEventListener( "click", function ( e ) {
         input.value += e.target.innerText;
-        console.log(input.value);
+
     });
 });
 
+operatorBtns.forEach(( operatorBtn ) => {
+    operatorBtn.addEventListener( "click", function() {
+        arithmeticOperator = operatorBtn.value;
+        firstTerm = parseFloat( input.value );
+        numberBtns.forEach(( numberBtn ) => {
+            numberBtn.addEventListener( "click", function ( e ) {
+                input.value = "";
+                input.value += e.target.innerText;
+                secondTerm = parseFloat( input.value );
+            });
+        });
+    });
+});
 
+equalsBtn.addEventListener( "click", function() {
+    input.value = operate( arithmenticOperator, firstTerm, secondTerm);
+})
