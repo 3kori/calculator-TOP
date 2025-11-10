@@ -11,7 +11,11 @@ function multiply( x, y ) {
 }
 
 function divide( x, y ) {
-    return x / y;
+    if ( y === 0 ) {
+        return input.value = "Error";
+    } else {
+        return x / y;
+    }
 }
 
 let firstTerm;
