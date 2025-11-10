@@ -41,7 +41,7 @@ const input= document.querySelector( ".input-display" );
 const operatorBtns = document.querySelectorAll(".operator-btns");
 const equalsBtn = document.querySelector( ".equals" );
 const clearBtn = document.querySelector( ".clear" );
-
+let results;
 
 numberBtns.forEach(( numberBtn ) => {
     numberBtn.addEventListener( "click", function ( e ) {
@@ -61,12 +61,13 @@ operatorBtns.forEach(( operatorBtn ) => {
                 secondTerm = parseFloat( input.value );
             });
         });
+        
     });
 });
 
 equalsBtn.addEventListener( "click", function() {
-    input.value = operate( arithmeticOperator, firstTerm, secondTerm);
-})
+    input.value = parseFloat(operate( arithmeticOperator, firstTerm, secondTerm).toFixed(8));
+});
 
 clearBtn.addEventListener( "click", function() {
     input.value = "";
