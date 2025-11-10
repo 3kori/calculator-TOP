@@ -35,3 +35,15 @@ function operate( operator, leftNo, rightNo ) {
         return divide( leftNo, rightNo );
     }
 }
+
+const numberBtns = document.querySelectorAll(".number-btns");
+const input= document.querySelector(".input-display");
+
+numberBtns.forEach(( numberBtn ) => {
+    numberBtn.addEventListener("click", function (e) {
+        input.value += e.target.innerText;
+        console.log(input.value);
+    });
+});
+
+
