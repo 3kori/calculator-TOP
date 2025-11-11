@@ -1,20 +1,28 @@
+
+
+const numberBtns = document.querySelectorAll( ".number-btns" );
+const input= document.querySelector( ".input-display" );
+const operatorBtns = document.querySelectorAll(".operator-btns");
+const equalsBtn = document.querySelector( ".equals" );
+const clearBtn = document.querySelector( ".clear" );
+
 function add( x, y ) {
-    return x + y;
+    return parseFloat(( x + y ).toFixed(9) );
 }
 
 function subtract( x, y ) {
-    return x - y;
+    return parseFloat(( x - y ).toFixed(9) );
 }
 
 function multiply( x, y ) {
-    return x * y;
+    return parseFloat(( x * y ).toFixed(9) );
 }
 
 function divide( x, y ) {
     if ( y === 0 ) {
         return input.value = "Error";
     } else {
-        return x / y;
+        return parseFloat(( x / y ).toFixed(9) );
     }
 }
 
@@ -40,17 +48,9 @@ function operate( operator, leftNo, rightNo ) {
     }
 }
 
-const numberBtns = document.querySelectorAll( ".number-btns" );
-const input= document.querySelector( ".input-display" );
-const operatorBtns = document.querySelectorAll(".operator-btns");
-const equalsBtn = document.querySelector( ".equals" );
-const clearBtn = document.querySelector( ".clear" );
-let results;
-
 numberBtns.forEach(( numberBtn ) => {
     numberBtn.addEventListener( "click", function ( e ) {
         input.value += e.target.innerText;
-
     });
 });
 
@@ -70,7 +70,15 @@ operatorBtns.forEach(( operatorBtn ) => {
 });
 
 equalsBtn.addEventListener( "click", function() {
-    input.value = parseFloat(operate( arithmeticOperator, firstTerm, secondTerm).toFixed(8));
+    input.value = operate( arithmeticOperator, firstTerm, secondTerm);
+
+    if ( input.value === "Error" ) {
+        numberBtns.forEach(( numberBtn ) => {
+            numberBtn.disabled = true;
+            console.log(numberBtn.disabled);
+        });
+        console.log(input.value);
+    }
 });
 
 clearBtn.addEventListener( "click", function() {
@@ -78,4 +86,8 @@ clearBtn.addEventListener( "click", function() {
     firstTerm = "";
     secondTerm = "";
     arithmeticOperator = "";
+    numberBtns.forEach(( numberBtn ) => {
+        numberBtn.disabled = false;
+        console.log(numberBtn.disabled);
+    });
 });
