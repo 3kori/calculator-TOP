@@ -51,7 +51,7 @@ numberBtns.forEach(( numberBtn ) => {
             console.log(secondTerm);
             return secondTerm;
         }
-        else if ( arithmeticOperator !== undefined ) {
+        else if ( arithmeticOperator !== undefined && firstTerm !== undefined ) {
             input.value = "";
             input.value += e.target.innerText;
             secondTerm = parseFloat( input.value );
@@ -69,8 +69,19 @@ numberBtns.forEach(( numberBtn ) => {
 
 operatorBtns.forEach(( operatorBtn ) => {
     operatorBtn.addEventListener( "click", function() {
-        arithmeticOperator = operatorBtn.value;
-        console.log(arithmeticOperator);
+        if ( firstTerm !== undefined && secondTerm !== undefined ) {
+            input.value = operate( arithmeticOperator, firstTerm, secondTerm );
+            firstTerm = parseFloat( input.value );
+            arithmeticOperator = operatorBtn.value;
+            secondTerm = undefined;
+            console.log(firstTerm);
+            console.log(secondTerm);
+            console.log(arithmeticOperator);
+        }
+        else {
+            arithmeticOperator = operatorBtn.value;
+            console.log(arithmeticOperator);
+        }
     });
 });
 
