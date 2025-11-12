@@ -74,21 +74,6 @@ operatorBtns.forEach(( operatorBtn ) => {
     });
 });
 
-/* operatorBtns.forEach(( operatorBtn ) => {
-    operatorBtn.addEventListener( "click", function() {
-        arithmeticOperator = operatorBtn.value;
-        firstTerm = parseFloat( input.value );
-        numberBtns.forEach(( numberBtn ) => {
-            numberBtn.addEventListener( "click", function ( e ) {
-                input.value = "";
-                input.value += e.target.innerText;
-                secondTerm = parseFloat( input.value );
-            });
-        });
-        
-    });
-}); */
-
 equalsBtn.addEventListener( "click", function() {
     if ( firstTerm === undefined ) {
         return input.value = "";   
