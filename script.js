@@ -31,30 +31,50 @@ let secondTerm;
 let arithmeticOperator;
 
 function operate( operator, leftNo, rightNo ) {
-    if( operator === "+" ) {
-        return add( leftNo, rightNo );
-    }
-
-    if( operator === "-" ) {
-        return subtract( leftNo, rightNo );
-    }
-
-    if( operator === "*" ) {
-        return multiply( leftNo, rightNo );
-    }
-
-    if( operator === "/" ) {
-        return divide( leftNo, rightNo );
+    switch ( operator ) {
+        case '+':
+            return add( leftNo, rightNo );
+        case '-':
+            return subtract( leftNo, rightNo);
+        case '*':
+            return multiply( leftNo, rightNo);
+        case '/':
+            return divide( leftNo, rightNo);
     }
 }
 
 numberBtns.forEach(( numberBtn ) => {
     numberBtn.addEventListener( "click", function ( e ) {
-        input.value += e.target.innerText;
+        if ( arithmeticOperator !== undefined && secondTerm !== undefined ) {
+            input.value += e.target.innerText;
+            secondTerm = parseFloat( input.value );
+            console.log(secondTerm);
+            return secondTerm;
+        }
+        else if ( arithmeticOperator !== undefined ) {
+            input.value = "";
+            input.value += e.target.innerText;
+            secondTerm = parseFloat( input.value );
+            console.log(secondTerm);
+            return secondTerm;
+        }
+        else {
+            input.value += e.target.innerText;
+            firstTerm = parseFloat( input.value );
+            console.log(firstTerm);
+            return firstTerm;
+        }
     });
 });
 
 operatorBtns.forEach(( operatorBtn ) => {
+    operatorBtn.addEventListener( "click", function() {
+        arithmeticOperator = operatorBtn.value;
+        console.log(arithmeticOperator);
+    });
+});
+
+/* operatorBtns.forEach(( operatorBtn ) => {
     operatorBtn.addEventListener( "click", function() {
         arithmeticOperator = operatorBtn.value;
         firstTerm = parseFloat( input.value );
@@ -67,27 +87,38 @@ operatorBtns.forEach(( operatorBtn ) => {
         });
         
     });
-});
+}); */
 
 equalsBtn.addEventListener( "click", function() {
-    input.value = operate( arithmeticOperator, firstTerm, secondTerm);
-
-    if ( input.value === "Error" ) {
+    if ( firstTerm === undefined ) {
+        return input.value = "";   
+    }
+    else if ( input.value === "Error" ) {
         numberBtns.forEach(( numberBtn ) => {
             numberBtn.disabled = true;
             console.log(numberBtn.disabled);
         });
         console.log(input.value);
     }
+    else {
+        input.value = operate( arithmeticOperator, firstTerm, secondTerm );
+        firstTerm = parseFloat( input.value );
+        console.log(firstTerm);
+        secondTerm = undefined;
+        arithmeticOperator = undefined;
+    }
 });
 
 clearBtn.addEventListener( "click", function() {
     input.value = "";
-    firstTerm = "";
-    secondTerm = "";
-    arithmeticOperator = "";
+    firstTerm = undefined;
+    secondTerm = undefined;
+    arithmeticOperator = undefined;
     numberBtns.forEach(( numberBtn ) => {
         numberBtn.disabled = false;
         console.log(numberBtn.disabled);
     });
+    console.log(firstTerm);
+    console.log(secondTerm);
+    console.log(arithmeticOperator);
 });
