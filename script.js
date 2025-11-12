@@ -89,6 +89,9 @@ equalsBtn.addEventListener( "click", function() {
     if ( firstTerm === undefined ) {
         return input.value = "";   
     }
+    else if ( ( firstTerm !== undefined && secondTerm === undefined ) ) {
+        return input.value = firstTerm;
+    }
     else if ( input.value === "Error" ) {
         numberBtns.forEach(( numberBtn ) => {
             numberBtn.disabled = true;
