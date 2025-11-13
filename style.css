@@ -25,7 +25,7 @@ button {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    padding: 24px;
+    padding: 18px;
     border: 2px solid #000;
     border-radius: 10px;
 }
@@ -40,17 +40,6 @@ button {
     text-align: right;
 }
 
-.calculator-keys {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.operator-keys {
-    display: flex;
-    justify-content: space-between;
-}
-
 .numbers-actions-keys {
     display: flex;
     justify-content: space-between;
@@ -62,6 +51,7 @@ button {
     gap: 10px;
 }
 
+.fifth-row,
 .forth-row,
 .third-row,
 .second-row,
@@ -71,8 +61,10 @@ button {
 }
 
 .number-btns,
-.operator-btns {
-    padding: 30px 0;
+.operator-btns,
+.equals,
+.delete {
+    padding: 25px 0;
 }
 
 .number-btns.double-size {
@@ -87,11 +79,10 @@ button {
     gap: 10px;
 }
 
-.action-btns {
-    height: 172px;
-}
+
 
 .action-btns.clear {
     border-bottom-right-radius: 12px;
+    height: 152px;
     background: #f44336;
 }
