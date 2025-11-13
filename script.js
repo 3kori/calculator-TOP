@@ -51,6 +51,16 @@ numberBtns.forEach(( numberBtn ) => {
                 console.log(numberBtn.disabled);
             });
         }
+         else if ( firstTerm !== undefined && secondTerm !== undefined && arithmeticOperator !== undefined ) {
+            firstTerm = undefined;
+            secondTerm = undefined;
+            arithmeticOperator = undefined;
+            input.value = "";
+            input.value += e.target.innerText;
+            firstTerm = parseFloat( input.value);
+            console.log(firstTerm);
+            return firstTerm;
+        }
         else if ( arithmeticOperator !== undefined && secondTerm !== undefined ) {
             input.value += e.target.innerText;
             secondTerm = parseFloat( input.value );
@@ -75,11 +85,11 @@ numberBtns.forEach(( numberBtn ) => {
 
 operatorBtns.forEach(( operatorBtn ) => {
     operatorBtn.addEventListener( "click", function() {
-        if ( firstTerm !== undefined && secondTerm !== undefined ) {
+        if ( firstTerm !== undefined && secondTerm !== undefined && arithmeticOperator !== undefined) {
             input.value = operate( arithmeticOperator, firstTerm, secondTerm );
+            secondTerm = undefined;
             firstTerm = parseFloat( input.value );
             arithmeticOperator = operatorBtn.value;
-            secondTerm = undefined;
             console.log(firstTerm);
             console.log(secondTerm);
             console.log(arithmeticOperator);
@@ -109,10 +119,9 @@ equalsBtn.addEventListener( "click", function() {
             arithmeticOperator = undefined;
             return;
         }
-        firstTerm = parseFloat( input.value );
         console.log(firstTerm);
-        secondTerm = undefined;
-        arithmeticOperator = undefined;
+        console.log(secondTerm);
+        console.log(arithmeticOperator);
     }
 });
 
