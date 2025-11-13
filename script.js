@@ -7,22 +7,22 @@ const equalsBtn = document.querySelector( ".equals" );
 const clearBtn = document.querySelector( ".clear" );
 
 function add( x, y ) {
-    return parseFloat(( x + y ).toFixed(9) );
+    return parseFloat(( x + y ).toFixed(10) );
 }
 
 function subtract( x, y ) {
-    return parseFloat(( x - y ).toFixed(9) );
+    return parseFloat(( x - y ).toFixed(10) );
 }
 
 function multiply( x, y ) {
-    return parseFloat(( x * y ).toFixed(9) );
+    return parseFloat(( x * y ).toFixed(10) );
 }
 
 function divide( x, y ) {
     if ( y === 0 ) {
         return input.value = "Error";
     } else {
-        return parseFloat(( x / y ).toFixed(9) );
+        return parseFloat(( x / y ).toFixed(10) );
     }
 }
 
@@ -45,7 +45,13 @@ function operate( operator, leftNo, rightNo ) {
 
 numberBtns.forEach(( numberBtn ) => {
     numberBtn.addEventListener( "click", function ( e ) {
-        if ( arithmeticOperator !== undefined && secondTerm !== undefined ) {
+        if (input.value === "Error") {
+            numberBtns.forEach(( numberBtn ) => {
+                numberBtn.disabled = true;
+                console.log(numberBtn.disabled);
+            });
+        }
+        else if ( arithmeticOperator !== undefined && secondTerm !== undefined ) {
             input.value += e.target.innerText;
             secondTerm = parseFloat( input.value );
             console.log(secondTerm);
@@ -92,15 +98,17 @@ equalsBtn.addEventListener( "click", function() {
     else if ( ( firstTerm !== undefined && secondTerm === undefined ) ) {
         return input.value = firstTerm;
     }
-    else if ( input.value === "Error" ) {
-        numberBtns.forEach(( numberBtn ) => {
-            numberBtn.disabled = true;
-            console.log(numberBtn.disabled);
-        });
-        console.log(input.value);
+    else if ( firstTerm !== undefined && arithmeticOperator !== undefined  && secondTerm === undefined ) {
+        return input.value = firstTerm;
     }
     else {
         input.value = operate( arithmeticOperator, firstTerm, secondTerm );
+        if ( input.value === "Error" ) {
+            firstTerm = undefined;
+            secondTerm = undefined;
+            arithmeticOperator = undefined;
+            return;
+        }
         firstTerm = parseFloat( input.value );
         console.log(firstTerm);
         secondTerm = undefined;
