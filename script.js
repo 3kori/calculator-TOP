@@ -4,6 +4,7 @@ const numberBtns = document.querySelectorAll( ".number-btns" );
 const input= document.querySelector( ".input-display" );
 const operatorBtns = document.querySelectorAll(".operator-btns");
 const equalsBtn = document.querySelector( ".equals" );
+const decimalBtn = document.querySelector( ".decimal");
 const clearBtn = document.querySelector( ".clear" );
 
 function add( x, y ) {
@@ -29,6 +30,7 @@ function divide( x, y ) {
 let firstTerm;
 let secondTerm;
 let arithmeticOperator;
+let result;
 
 function operate( operator, leftNo, rightNo ) {
     switch ( operator ) {
@@ -51,15 +53,13 @@ numberBtns.forEach(( numberBtn ) => {
                 console.log(numberBtn.disabled);
             });
         }
-         else if ( firstTerm !== undefined && secondTerm !== undefined && arithmeticOperator !== undefined ) {
-            firstTerm = undefined;
-            secondTerm = undefined;
-            arithmeticOperator = undefined;
+        else if ( result !== undefined ) {
             input.value = "";
             input.value += e.target.innerText;
+            result = undefined;
+            secondTerm = undefined;
             firstTerm = parseFloat( input.value);
             console.log(firstTerm);
-            return firstTerm;
         }
         else if ( arithmeticOperator !== undefined && secondTerm !== undefined ) {
             input.value += e.target.innerText;
@@ -85,7 +85,13 @@ numberBtns.forEach(( numberBtn ) => {
 
 operatorBtns.forEach(( operatorBtn ) => {
     operatorBtn.addEventListener( "click", function() {
-        if ( firstTerm !== undefined && secondTerm !== undefined && arithmeticOperator !== undefined) {
+        if ( input.value === "Error" ) {
+            operatorBtns.forEach(( operatorBtn ) => {
+                operatorBtn.disabled = true;
+                console.log( operatorBtn.disabled );
+            });
+        }
+        else if ( firstTerm !== undefined && secondTerm !== undefined && arithmeticOperator !== undefined) {
             input.value = operate( arithmeticOperator, firstTerm, secondTerm );
             secondTerm = undefined;
             firstTerm = parseFloat( input.value );
@@ -102,7 +108,11 @@ operatorBtns.forEach(( operatorBtn ) => {
 });
 
 equalsBtn.addEventListener( "click", function() {
-    if ( firstTerm === undefined ) {
+    if ( input.value === "Error" ) {
+        equalsBtn.disabled = true;
+        console.log( equalsBtn.disabled );
+    }
+    else if ( firstTerm === undefined ) {
         return input.value = "";   
     }
     else if ( ( firstTerm !== undefined && secondTerm === undefined ) ) {
@@ -113,6 +123,7 @@ equalsBtn.addEventListener( "click", function() {
     }
     else {
         input.value = operate( arithmeticOperator, firstTerm, secondTerm );
+        result = input.value;
         if ( input.value === "Error" ) {
             firstTerm = undefined;
             secondTerm = undefined;
@@ -120,10 +131,29 @@ equalsBtn.addEventListener( "click", function() {
             return;
         }
         console.log(firstTerm);
-        console.log(secondTerm);
         console.log(arithmeticOperator);
+        console.log(secondTerm);
+        console.log( "This the answer when clicking equals sign:", result);
     }
 });
+
+decimalBtn.addEventListener( "click", function() {
+    if ( firstTerm !== undefined && secondTerm === undefined && arithmeticOperator !== undefined ) {
+        input.value = ""
+        input.value = 0 + decimalBtn.value;
+        secondTerm = input.value;
+    }
+    else if ( input.value === "" ) {
+        input.value = 0 + decimalBtn.value;
+    }
+    else if ( input.value.includes( "." ) ) {
+        decimalBtn.disabled = true;
+    }
+    else {
+        input.value += decimalBtn.value;
+    }
+});
+
 
 clearBtn.addEventListener( "click", function() {
     input.value = "";
@@ -134,6 +164,13 @@ clearBtn.addEventListener( "click", function() {
         numberBtn.disabled = false;
         console.log(numberBtn.disabled);
     });
+    operatorBtns.forEach(( operatorBtn ) => {
+        operatorBtn.disabled = false;
+        console.log(operatorBtn.disabled);
+    });
+    equalsBtn.disabled = false;
+    decimalBtn.disabled = false;
+    console.log(equalsBtn.disabled)
     console.log(firstTerm);
     console.log(secondTerm);
     console.log(arithmeticOperator);
