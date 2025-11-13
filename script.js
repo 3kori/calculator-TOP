@@ -58,6 +58,7 @@ numberBtns.forEach(( numberBtn ) => {
             input.value += e.target.innerText;
             result = undefined;
             secondTerm = undefined;
+            arithmeticOperator = undefined;
             firstTerm = parseFloat( input.value);
             console.log(firstTerm);
         }
@@ -102,6 +103,8 @@ operatorBtns.forEach(( operatorBtn ) => {
         }
         else {
             arithmeticOperator = operatorBtn.value;
+            decimalBtn.disabled = false;
+            console.log(decimalBtn.disabled);
             console.log(arithmeticOperator);
         }
     });
@@ -142,15 +145,19 @@ decimalBtn.addEventListener( "click", function() {
         input.value = ""
         input.value = 0 + decimalBtn.value;
         secondTerm = input.value;
+        console.log(secondTerm);
     }
     else if ( input.value === "" ) {
         input.value = 0 + decimalBtn.value;
+        firstTerm = parseFloat( input.value );
+        console.log(firstTerm);
     }
     else if ( input.value.includes( "." ) ) {
         decimalBtn.disabled = true;
     }
     else {
         input.value += decimalBtn.value;
+        decimalBtn.disabled = true;
     }
 });
 
