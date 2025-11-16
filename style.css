@@ -94,6 +94,7 @@ button:active {
     font-family: var(--ff-calc);
     font-size: var(--fs-large);
     text-align: right;
+    letter-spacing: 5px;
 }
 
 .numbers-actions-keys {
