@@ -174,7 +174,7 @@ deleteBtn.addEventListener( "click", function() {
         return;
     }
 
-    if ( input.value === "Error" ) {
+    if ( input.value === "Error" || calculationDone ) {
         resetCalculator();
         return;
     }
@@ -205,7 +205,7 @@ document.addEventListener( "keydown", function ( e ) {
         return;
     }
 
-        if (["+", "-", "*", "/"].includes( key )) {
+    if (["+", "-", "*", "/"].includes( key )) {
         document.querySelector( `.operator-btns[value="${key}"]`)?.click();
         return;
     }
