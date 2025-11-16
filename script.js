@@ -55,9 +55,7 @@ numberBtns.forEach(( numberBtn ) => {
             input.value += e.target.innerText;
             firstTerm = parseFloat( input.value );
             secondTerm = undefined;
-            
             calculationDone = false;
-            console.log(firstTerm);
             return;
         }
 
@@ -71,20 +69,17 @@ numberBtns.forEach(( numberBtn ) => {
         else if ( arithmeticOperator !== undefined && secondTerm !== undefined ) {
             input.value += e.target.innerText;
             secondTerm = parseFloat( input.value );
-            console.log(secondTerm);
             return;
         }
         else if ( arithmeticOperator !== undefined && firstTerm !== undefined ) {
             input.value = "";
             input.value += e.target.innerText;
             secondTerm = parseFloat( input.value );
-            console.log(secondTerm);
             return;
         }
         else {
             input.value += e.target.innerText;
             firstTerm = parseFloat( input.value );
-            console.log(firstTerm);
             return;
         }
     });
@@ -98,16 +93,10 @@ operatorBtns.forEach(( operatorBtn ) => {
             result = parseFloat( input.value );
             arithmeticOperator = operatorBtn.value;
             firstTerm = parseFloat( result );
-            console.log("This is the firstterm when pressing the operator:", firstTerm);
-            console.log("This is the arithmetic operator when pressing the operator:",arithmeticOperator);
-            console.log("This is the secondterm when pressing the operator:",secondTerm);
-            console.log("This is the result when pressing the operator:", result);
         }
         else {
             arithmeticOperator = operatorBtn.value;
             decimalBtn.disabled = false;
-            console.log(decimalBtn.disabled);
-            console.log(arithmeticOperator);
         }
     });
 });
@@ -132,10 +121,6 @@ equalsBtn.addEventListener( "click", function() {
         arithmeticOperator = undefined;
         decimalBtn.disabled = false;
         calculationDone = true;
-        console.log("This is the firstterm when clicking equals sign:", firstTerm);
-        console.log("This is the arithmetic operator when clicking equals sign:", arithmeticOperator);
-        console.log("This is the secondterm when clicking equals sign:", secondTerm);
-        console.log( "This the answer when clicking equals sign:", result);
     }
 });
 
@@ -155,12 +140,10 @@ decimalBtn.addEventListener( "click", function() {
         input.value = "0.";
         secondTerm = parseFloat( input.value );
         decimalBtn.disabled = true;
-        console.log(secondTerm);
     }
     else if ( input.value === "" ) {
         input.value = "0.";
         firstTerm = parseFloat( input.value );
-        console.log(firstTerm);
     }
     else if ( input.value.includes( "." )) {
         return;
@@ -174,10 +157,6 @@ decimalBtn.addEventListener( "click", function() {
 
 clearBtn.addEventListener( "click", function() {
     resetCalculator();
-    console.log(equalsBtn.disabled)
-    console.log(firstTerm);
-    console.log(secondTerm);
-    console.log(arithmeticOperator);
 });
 
 deleteBtn.addEventListener( "click", function() {
@@ -194,7 +173,6 @@ deleteBtn.addEventListener( "click", function() {
     else if ( secondTerm !== undefined && result === undefined ) {
         input.value = input.value.toString().substring(0, input.value.length - 1);
         secondTerm = input.value === "" ? undefined : parseFloat( input.value);
-        console.log("The secondterm while deleting:", secondTerm);
         if ( !input.value.includes( "." )) {
             decimalBtn.disabled = false;
         }
@@ -203,7 +181,6 @@ deleteBtn.addEventListener( "click", function() {
     else{
         input.value = input.value.toString().substring(0, input.value.length - 1);
         firstTerm = input.value === "" ? undefined : parseFloat( input.value);
-        console.log("The firstterm while deleting:", firstTerm);
         if ( !input.value.includes( "." )) {
             decimalBtn.disabled = false;
         }
