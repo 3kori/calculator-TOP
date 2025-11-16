@@ -1,3 +1,19 @@
+:root {
+
+    --neutral-black: #000;
+    --neutral-white: #fff;
+    --bg-gradient-start: #2d313a;
+    --bg-gradient-end: #1e2025;
+
+    --button-bg-color: #131212ff;
+    --action-bg-color: #f44336;
+    --display-bg-color: #d8d6d6;
+
+    --ff-calc: 'calcfont', sans-serif;
+    --fs-medium: 1.5em;
+    --fs-large: 2em;
+}
+
 @font-face {
     font-family: 'calcfont';
     src: url(./assets/fonts/digital-7.ttf) format('truetype');
@@ -20,11 +36,11 @@ button {
     width: 70px;
     border: none;
     border-radius: 5px;
-    background-color: #131212ff;
+    background-color: var(--button-bg-color);
     color: #fff;
-    font-size: 24px;
+    font-size: var(--fs-medium);
     cursor: pointer;
-    font-family: 'calcfont', sans-serif;
+    font-family: var(--ff-calc);
     transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
     box-shadow: 
         inset 0 1px 2px rgba(255, 255, 255, 0.07),
@@ -59,7 +75,7 @@ button:active {
     flex-direction: column;
     gap: 15px;
     padding: 18px;
-    background: linear-gradient(145deg, #2d313a, #1e2025);
+    background: linear-gradient(145deg, var(--bg-gradient-start), var(--bg-gradient-end));
     border-radius: 15px;
     box-shadow: 
         inset 0 4px 6px rgba(255, 255, 255, 0.08),
@@ -75,8 +91,8 @@ button:active {
     border-radius: 5px;
     background: #d8d6d6;
     color: #000;
-    font-family: 'calcfont', sans-serif;
-    font-size: 32px;
+    font-family: var(--ff-calc);
+    font-size: var(--fs-large);
     text-align: right;
 }
 
@@ -122,7 +138,7 @@ button:active {
 .action-btns.clear {
     border-bottom-right-radius: 12px;
     height: 152px;
-    background: #f44336;
+    background: var(--action-bg-color);
     box-shadow:
         inset 0px 1px 2px rgba(255, 255, 255, 0.25),
         0 2px 4px rgba(0, 0, 0, 0.35),
