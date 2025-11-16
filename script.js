@@ -22,7 +22,8 @@ function multiply( x, y ) {
 
 function divide( x, y ) {
     if ( y === 0 ) {
-        return input.value = "Error";
+        input.value = "Error";
+        return "Error";
     } else {
         return parseFloat(( x / y ).toFixed(10) );
     }
@@ -67,43 +68,31 @@ numberBtns.forEach(( numberBtn ) => {
             calculationDone = false;
             return;
         }
-        else if (input.value === "Error") {
-            numberBtns.forEach(( numberBtn ) => {
-                numberBtn.disabled = true;
-                console.log(numberBtn.disabled);
-            });
-        }
         else if ( arithmeticOperator !== undefined && secondTerm !== undefined ) {
             input.value += e.target.innerText;
             secondTerm = parseFloat( input.value );
             console.log(secondTerm);
-            return secondTerm;
+            return;
         }
         else if ( arithmeticOperator !== undefined && firstTerm !== undefined ) {
             input.value = "";
             input.value += e.target.innerText;
             secondTerm = parseFloat( input.value );
             console.log(secondTerm);
-            return secondTerm;
+            return;
         }
         else {
             input.value += e.target.innerText;
             firstTerm = parseFloat( input.value );
             console.log(firstTerm);
-            return firstTerm;
+            return;
         }
     });
 });
 
 operatorBtns.forEach(( operatorBtn ) => {
     operatorBtn.addEventListener( "click", function() {
-        if ( input.value === "Error" ) {
-            operatorBtns.forEach(( operatorBtn ) => {
-                operatorBtn.disabled = true;
-                console.log( operatorBtn.disabled );
-            });
-        }
-        else if ( firstTerm !== undefined && secondTerm !== undefined && arithmeticOperator !== undefined) {
+        if ( firstTerm !== undefined && secondTerm !== undefined && arithmeticOperator !== undefined) {
             input.value = operate( arithmeticOperator, firstTerm, secondTerm );
             secondTerm = undefined;
             result = parseFloat( input.value );
@@ -125,17 +114,11 @@ operatorBtns.forEach(( operatorBtn ) => {
 
 equalsBtn.addEventListener( "click", function() {
     if ( input.value === "Error" ) {
-        equalsBtn.disabled = true;
-        firstTerm = undefined;
-        secondTerm = undefined;
-        arithmeticOperator = undefined;
-        console.log( equalsBtn.disabled );
+        resetCalculator();
+        return;
     }
     else if ( firstTerm === undefined ) {
         return input.value = "";   
-    }
-    else if ( ( firstTerm !== undefined && secondTerm === undefined ) ) {
-        return input.value = firstTerm;
     }
     else if ( firstTerm !== undefined && arithmeticOperator !== undefined  && secondTerm === undefined ) {
         return input.value = firstTerm;
@@ -157,8 +140,16 @@ equalsBtn.addEventListener( "click", function() {
 });
 
 decimalBtn.addEventListener( "click", function() {
-    if ( input.value === "Error" ) {
+    if ( calculationDone === true && arithmeticOperator === undefined ) {
+        input.value = "0.";
+        firstTerm = parseFloat( input.value );
         decimalBtn.disabled = true;
+        calculationDone = false;
+        return;
+    }
+
+    if ( input.value === "Error" ) {
+        return;
     }
     else if ( firstTerm !== undefined && secondTerm === undefined && arithmeticOperator !== undefined ) {
         input.value = "0.";
@@ -171,8 +162,8 @@ decimalBtn.addEventListener( "click", function() {
         firstTerm = parseFloat( input.value );
         console.log(firstTerm);
     }
-    else if ( input.value.includes( "." ) ) {
-        decimalBtn.disabled = true;
+    else if ( input.value.includes( "." )) {
+        return;
     }
     else {
         input.value += decimalBtn.value;
@@ -182,21 +173,7 @@ decimalBtn.addEventListener( "click", function() {
 
 
 clearBtn.addEventListener( "click", function() {
-    input.value = "";
-    firstTerm = undefined;
-    secondTerm = undefined;
-    arithmeticOperator = undefined;
-    result = undefined;
-    numberBtns.forEach(( numberBtn ) => {
-        numberBtn.disabled = false;
-        console.log(numberBtn.disabled);
-    });
-    operatorBtns.forEach(( operatorBtn ) => {
-        operatorBtn.disabled = false;
-        console.log(operatorBtn.disabled);
-    });
-    equalsBtn.disabled = false;
-    decimalBtn.disabled = false;
+    resetCalculator();
     console.log(equalsBtn.disabled)
     console.log(firstTerm);
     console.log(secondTerm);
@@ -204,26 +181,41 @@ clearBtn.addEventListener( "click", function() {
 });
 
 deleteBtn.addEventListener( "click", function() {
-    if ( result !== undefined ) {
-        input.value = "";
-        firstTerm = undefined;
-        secondTerm = undefined;
+    if ( arithmeticOperator !== undefined && secondTerm === undefined ) {
         arithmeticOperator = undefined;
-        result = undefined;
-        console.log("The result while deleting:", result);
-        return result;
+        decimalBtn.disabled = input.value.includes( "." );
+        return;
+    }
+
+    if ( input.value === "Error" ) {
+        resetCalculator();
+        return;
     }
     else if ( secondTerm !== undefined && result === undefined ) {
         input.value = input.value.toString().substring(0, input.value.length - 1);
-        secondTerm = parseFloat( input.value);
+        secondTerm = input.value === "" ? undefined : parseFloat( input.value);
         console.log("The secondterm while deleting:", secondTerm);
-        return secondTerm;
+        if ( !input.value.includes( "." )) {
+            decimalBtn.disabled = false;
+        }
+        return;
     }
-    else if ( firstTerm !== undefined && arithmeticOperator === undefined && secondTerm === undefined ) {
+    else{
         input.value = input.value.toString().substring(0, input.value.length - 1);
-        firstTerm = parseFloat( input.value);
+        firstTerm = input.value === "" ? undefined : parseFloat( input.value);
         console.log("The firstterm while deleting:", firstTerm);
-        return firstTerm;
+        if ( !input.value.includes( "." )) {
+            decimalBtn.disabled = false;
+        }
     }
-
 });
+
+function resetCalculator() {
+    input.value = ""
+    firstTerm = undefined;
+    arithmeticOperator = undefined;
+    secondTerm = undefined;
+    result = undefined;
+    decimalBtn.disabled = false;
+    calculationDone = false;
+}
