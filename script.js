@@ -194,3 +194,39 @@ deleteBtn.addEventListener( "click", function() {
         }
     }
 });
+
+/* Keyboard Support */
+
+document.addEventListener( "keydown", function ( e ) {
+    const key = e.key;
+
+    if ( !isNaN( key )) {
+        document.querySelector( `.number-btns[data-num="${key}"]`)?.click();
+        return;
+    }
+
+        if (["+", "-", "*", "/"].includes( key )) {
+        document.querySelector( `.operator-btns[value="${key}"]`)?.click();
+        return;
+    }
+
+    if ( key === "." ) {
+        decimalBtn.click();
+        return;
+    }
+
+    if ( key === "Enter" || key === "=" ) {
+        equalsBtn.click();
+        return;
+    }
+
+    if ( key === "Backspace" ) {
+        deleteBtn.click();
+        return;
+    }
+
+        if ( key === "Escape" ) {
+        clearBtn.click();
+        return;
+    }
+});
