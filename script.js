@@ -194,13 +194,3 @@ deleteBtn.addEventListener( "click", function() {
         }
     }
 });
-
-function resetCalculator() {
-    input.value = ""
-    firstTerm = undefined;
-    arithmeticOperator = undefined;
-    secondTerm = undefined;
-    result = undefined;
-    decimalBtn.disabled = false;
-    calculationDone = false;
-}
