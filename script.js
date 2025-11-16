@@ -1,5 +1,3 @@
-
-
 const numberBtns = document.querySelectorAll( ".number-btns" );
 const input= document.querySelector( ".input-display" );
 const operatorBtns = document.querySelectorAll(".operator-btns");
@@ -46,6 +44,16 @@ function operate( operator, leftNo, rightNo ) {
         case '/':
             return divide( leftNo, rightNo);
     }
+}
+
+function resetCalculator() {
+    input.value = ""
+    firstTerm = undefined;
+    arithmeticOperator = undefined;
+    secondTerm = undefined;
+    result = undefined;
+    decimalBtn.disabled = false;
+    calculationDone = false;
 }
 
 numberBtns.forEach(( numberBtn ) => {
