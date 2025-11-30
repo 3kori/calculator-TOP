@@ -1,3 +1,11 @@
+@font-face {
+    font-family: 'Calc-font';
+    src: url('./assets/fonts/Digital-7.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
 :root {
 
     --neutral-black: #000;
@@ -12,11 +20,6 @@
     --ff-calc: 'calcfont', sans-serif;
     --fs-medium: 1.5em;
     --fs-large: 2em;
-}
-
-@font-face {
-    font-family: 'calcfont';
-    src: url(./assets/fonts/digital-7.ttf) format('truetype');
 }
 
 * {
